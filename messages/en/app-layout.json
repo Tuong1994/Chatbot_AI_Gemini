@@ -1,0 +1,20 @@
+{
+  "appLayout": {
+    "sidebar": {
+      "chats": "Chats",
+      "theme": {
+        "title": "Theme",
+        "dark": "Dark",
+        "light": "Light",
+        "system": "System"
+      },
+      "actions": {
+        "newChat": "New chat",
+        "collapse": "Collapse menu",
+        "expand": "Expand menu",
+        "rename": "Rename",
+        "delete": "Delete"
+      }
+    }
+  }
+}
