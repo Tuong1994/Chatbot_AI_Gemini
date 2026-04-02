@@ -1,24 +1,23 @@
 "use client";
 
 import { FC, ReactNode } from "react";
-import { SidebarInset, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+import { SidebarInset } from "@/components/ui/sidebar";
 import AppLayoutSidebar from "./Sidebar";
+import ContentHeader from "./ContentHeader";
 
 interface AppLayoutProps {
   children?: ReactNode;
 }
 
 const AppLayout: FC<AppLayoutProps> = ({ children }) => {
-  const { isMobile } = useSidebar();
-
   return (
-    <main className="flex min-h-screen">
+    <div className="flex w-full min-h-screen">
       <AppLayoutSidebar />
       <SidebarInset>
-        {isMobile && <SidebarTrigger />}
-        {children}
+        <ContentHeader />
+        <div className="w-full p-5 flex-1">{children}</div>
       </SidebarInset>
-    </main>
+    </div>
   );
 };
 

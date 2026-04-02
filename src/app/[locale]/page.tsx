@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import InputPrompt from "@/features/Home/InputPrompt";
+import ToolCategories from "@/features/Home/ToolCategories";
 
 export default function Home() {
+  const [selectedTool, setSelectedTool] = useState<string>("");
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,5 +48,22 @@ export default function Home() {
     }
   };
 
-  return <div>Content</div>;
+  const handleSelectTool = (tool: string) => setSelectedTool(tool);
+
+  const handleCancelTool = () => setSelectedTool("");
+
+  return (
+    <div className="h-full relative sm:px-2.5 lg:px-96 flex flex-col justify-center">
+      {Boolean(selectedTool) && (
+        <div className="flex-1">
+          <ToolCategories />
+        </div>
+      )}
+      <InputPrompt
+        selectedTool={selectedTool}
+        onSelectTool={handleSelectTool}
+        onCancelTool={handleCancelTool}
+      />
+    </div>
+  );
 }
