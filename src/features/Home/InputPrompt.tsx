@@ -18,17 +18,19 @@ import {
 } from "@/components/ui/input-group";
 import { Image, List, Music, SendHorizonal, X } from "lucide-react";
 import { Title } from "@/components/ui/typography";
+import usePromptStore from "@/store/PromptStore";
 
-interface InputPromptProps extends HTMLAttributes<HTMLTextAreaElement> {
-  selectedTool: string;
-  onSelectTool: (tool: string) => void
-  onCancelTool: () => void;
-}
+interface InputPromptProps extends HTMLAttributes<HTMLTextAreaElement> {}
 
 const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProps> = (
-  { selectedTool, onSelectTool, onCancelTool, ...restProps },
+  { ...restProps },
   ref
 ) => {
+  const [selectedTool, setSelectedTool, resetTool] = usePromptStore((state) => [
+    state.selectedTool,
+    state.setSelectedTool,
+    state.resetTool,
+  ]);
 
   const tools = [
     {
@@ -56,17 +58,17 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
     return tools
       .filter((tool) => tool.type === selectedTool)
       .map((tool) => (
-        <Button key={tool.type} variant="outline" onClick={onCancelTool}>
+        <Button key={tool.type} variant="outline" onClick={resetTool}>
           <tool.icon />
           <span>{tool.title}</span>
-          <X onClick={onCancelTool} />
+          <X onClick={resetTool} />
         </Button>
       ));
   }, [selectedTool]);
 
   return (
-    <div>
-      <Title className="mb-5 font-semibold">Where should we start ?</Title>
+    <div className="w-full bg-background">
+      {!Boolean(selectedTool) ? <Title className="mb-5 font-semibold">Where should we start ?</Title> : null}
       <InputGroup>
         <InputGroupTextarea ref={ref} {...restProps} placeholder="Ask AI" />
         <InputGroupAddon align="block-end">
@@ -79,7 +81,7 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-48">
               <DropdownMenuGroup>
-                <DropdownMenuRadioGroup value={selectedTool} onValueChange={onSelectTool}>
+                <DropdownMenuRadioGroup value={selectedTool} onValueChange={setSelectedTool}>
                   {renderToolDropdownItem()}
                 </DropdownMenuRadioGroup>
               </DropdownMenuGroup>
@@ -93,6 +95,7 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
+      <p className="p-2.5 text-xs text-center">Chatbot is AI and can make mistakes.</p>
     </div>
   );
 };

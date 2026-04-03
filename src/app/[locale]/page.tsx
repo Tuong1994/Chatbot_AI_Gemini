@@ -2,11 +2,16 @@
 import { useState } from "react";
 import InputPrompt from "@/features/Home/InputPrompt";
 import ToolCategories from "@/features/Home/ToolCategories";
+import PageLayout from "@/components/page/PageLayout";
+import usePromptStore from "@/store/PromptStore";
 
 export default function Home() {
-  const [selectedTool, setSelectedTool] = useState<string>("");
+  const [selectedTool] = usePromptStore((state) => [state.selectedTool]);
+
   const [prompt, setPrompt] = useState("");
+
   const [response, setResponse] = useState("");
+  
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -48,22 +53,13 @@ export default function Home() {
     }
   };
 
-  const handleSelectTool = (tool: string) => setSelectedTool(tool);
-
-  const handleCancelTool = () => setSelectedTool("");
-
   return (
-    <div className="h-full relative sm:px-2.5 lg:px-96 flex flex-col justify-center">
+    <PageLayout footer={<InputPrompt />}>
       {Boolean(selectedTool) && (
         <div className="flex-1">
           <ToolCategories />
         </div>
       )}
-      <InputPrompt
-        selectedTool={selectedTool}
-        onSelectTool={handleSelectTool}
-        onCancelTool={handleCancelTool}
-      />
-    </div>
+    </PageLayout>
   );
 }
