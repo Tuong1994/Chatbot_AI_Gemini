@@ -172,7 +172,7 @@ const ToolCategories: FC<ToolCategoriesProps> = () => {
 
   return (
     <ScrollArea className="pt-5 pb-40">
-      <Title className="mb-5 font-semibold">Pick a style for your image</Title>
+      <Title className="mb-5 font-light">Pick a style for your image</Title>
       <div className="grid grid-cols-4 gap-4">
         {items.map((item) => (
           <AspectRatio ratio={1 / 1} key={item.id}>

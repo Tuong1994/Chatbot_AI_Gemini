@@ -2,11 +2,17 @@
   "appLayout": {
     "sidebar": {
       "chats": "Chats",
+      "setting": "Setting",
       "theme": {
         "title": "Theme",
         "dark": "Dark",
         "light": "Light",
         "system": "System"
+      },
+      "locale": {
+        "title": "Language",
+        "en": "English",
+        "vn": "Vietnamese"
       },
       "actions": {
         "newChat": "New chat",

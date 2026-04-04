@@ -68,7 +68,7 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
 
   return (
     <div className="w-full bg-background">
-      {!Boolean(selectedTool) ? <Title className="mb-5 font-semibold">Where should we start ?</Title> : null}
+      {!Boolean(selectedTool) ? <Title className="mb-5 font-medium">Where should we start ?</Title> : null}
       <InputGroup>
         <InputGroupTextarea ref={ref} {...restProps} placeholder="Ask AI" />
         <InputGroupAddon align="block-end">
