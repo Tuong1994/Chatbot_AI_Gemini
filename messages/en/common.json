@@ -29,7 +29,10 @@
         "select": "Select",
         "search": "Search",
         "imagesUpload": "Select or drag image here",
-        "filesUpload": "Choose file"
+        "filesUpload": "Choose file",
+        "chatbot": "Ask Chatbot",
+        "image": "Describe your image",
+        "music": "Describe your track"
       },
       "rule": {
         "required": "This field is required",
@@ -80,6 +83,15 @@
       "showing": "Showing",
       "of": "of",
       "result": "results"
+    },
+    "inputPrompt": {
+      "label": "Where should we start",
+      "note": "Chatbot is AI and can make mistakes",
+      "tools": {
+        "title": "Tools",
+        "image": "Create image",
+        "music": "Create music"
+      }
     },
     "message": {
       "success": {

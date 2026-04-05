@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, ForwardRefRenderFunction, HTMLAttributes, useCallback, useState } from "react";
+import { forwardRef, ForwardRefRenderFunction, HTMLAttributes, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/input-group";
 import { Image, List, Music, SendHorizonal, X } from "lucide-react";
 import { Title } from "@/components/ui/typography";
+import { EToolType } from "@/services/prompt/enum";
+import { useTranslations } from "next-intl";
 import usePromptStore from "@/store/PromptStore";
 
 interface InputPromptProps extends HTMLAttributes<HTMLTextAreaElement> {}
@@ -26,6 +28,8 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
   { ...restProps },
   ref
 ) => {
+  const t = useTranslations("common");
+
   const [selectedTool, setSelectedTool, resetTool] = usePromptStore((state) => [
     state.selectedTool,
     state.setSelectedTool,
@@ -34,13 +38,13 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
 
   const tools = [
     {
-      type: "image",
-      title: "Create image",
+      type: EToolType.IMAGE,
+      title: t("inputPrompt.tools.image"),
       icon: Image,
     },
     {
-      type: "music",
-      title: "Create music",
+      type: EToolType.MUSIC,
+      title: t("inputPrompt.tools.music"),
       icon: Music,
     },
   ];
@@ -60,15 +64,20 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
       .map((tool) => (
         <Button key={tool.type} variant="outline" onClick={resetTool}>
           <tool.icon />
-          <span>{tool.title}</span>
+          <span className="hidden lg:block">{tool.title}</span>
           <X onClick={resetTool} />
         </Button>
       ));
   }, [selectedTool]);
 
+  const handleSelectTool = (tool: string) => {
+    const newTool = tool as EToolType;
+    setSelectedTool(newTool);
+  };
+
   return (
     <div className="w-full bg-background">
-      {!Boolean(selectedTool) ? <Title className="mb-5 font-medium">Where should we start ?</Title> : null}
+      {!Boolean(selectedTool) ? <Title className="mb-5 font-medium">{t("inputPrompt.label")} ?</Title> : null}
       <InputGroup>
         <InputGroupTextarea ref={ref} {...restProps} placeholder="Ask AI" />
         <InputGroupAddon align="block-end">
@@ -76,12 +85,12 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
             <DropdownMenuTrigger asChild>
               <Button variant="ghost">
                 <List />
-                <span>Tools</span>
+                <span>{t("inputPrompt.tools.title")}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-48">
               <DropdownMenuGroup>
-                <DropdownMenuRadioGroup value={selectedTool} onValueChange={setSelectedTool}>
+                <DropdownMenuRadioGroup value={String(selectedTool)} onValueChange={handleSelectTool}>
                   {renderToolDropdownItem()}
                 </DropdownMenuRadioGroup>
               </DropdownMenuGroup>
@@ -95,7 +104,7 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
-      <p className="p-2.5 text-xs text-center">Chatbot is AI and can make mistakes.</p>
+      <p className="p-2.5 text-xs text-center">{t("inputPrompt.note")}</p>
     </div>
   );
 };

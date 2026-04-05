@@ -1,0 +1,114 @@
+[
+  {
+    "id": "7SAXCf75CToiwWi",
+    "name": "90's rap",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/90_s_rap.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/boom_bap_v2.webp",
+    "prompt": "90s hip hop style, boom bap beat, gritty street atmosphere, classic vinyl scratching, soulful samples, heavy kick and snare"
+  },
+  {
+    "id": "7GRty74JGzGRHRA",
+    "name": "Latin pop",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/latin_pop.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/latin_pop_v2.webp",
+    "prompt": "latin pop, energetic acoustic guitar, danceable tropical rhythm, vibrant brass section, upbeat modern production"
+  },
+  {
+    "id": "7C8TE2oJUyfGbnX",
+    "name": "Team anthem",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/team_anthem.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/team_anthem.webp",
+    "prompt": "epic sports anthem, stadium crowd cheering, powerful drums, cinematic horns, triumphant and motivational mood"
+  },
+  {
+    "id": "5YcQ7ninNzGzST8",
+    "name": "8-bit",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/8_bit.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/8_bit_gaming_v2.webp",
+    "prompt": "8-bit chiptune style, retro video game music, square wave synth, nostalgic electronic sounds, lo-fi gaming aesthetic"
+  },
+  {
+    "id": "48cmHB66Mu2UTWu",
+    "name": "Workout",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/workout.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/workout_v2.webp",
+    "prompt": "high-energy workout music, aggressive synth bass, fast tempo, motivational electronic dance beat, driving rhythm"
+  },
+  {
+    "id": "xtzZQGYDaQfivzP",
+    "name": "Reggaeton",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/reggaeton.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/reggaeton.webp",
+    "prompt": "classic reggaeton riddim, dembow beat, heavy bass, tropical urban vibe, puerto rican street style"
+  },
+  {
+    "id": "9ccBNEUfLMWL3tq",
+    "name": "R&B romance",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/rnb_romance.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/rnb_romance.webp",
+    "prompt": "smooth R&B, romantic slow jam, sensual silk textures, 90s inspired harmonies, mellow electric piano"
+  },
+  {
+    "id": "B8Ex4U4GdEoD2oR",
+    "name": "Kawaii metal",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/kawaii_metal.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/kawaii_metal_v2.webp",
+    "prompt": "kawaii metal style, heavy distorted guitars, j-pop vocal melodies, high energy fusion, hyperactive drums"
+  },
+  {
+    "id": "eZcEiADTSQPTw48",
+    "name": "Cinematic",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/cinematic.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/cinematic_score_v2.webp",
+    "prompt": "grand cinematic film score, orchestral strings, dramatic percussion, tension building, sweeping movie soundtrack"
+  },
+  {
+    "id": "35PvCx4QmjYKs3i",
+    "name": "Emo",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/emo.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/emo_v2.webp",
+    "prompt": "emo rock, emotional guitar riffs, melancholic melody, mid-2000s punk rock aesthetic, angst-filled atmosphere"
+  },
+  {
+    "id": "A6PiNVTzfyqf2WC",
+    "name": "Afropop",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/afropop.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/afro_pop_v2.webp",
+    "prompt": "afropop rhythms, polyrhythmic percussion, catchy synth melodies, west african influence, modern dance vibes"
+  },
+  {
+    "id": "AtyAtQ8jwjm5GKb",
+    "name": "Forest bath",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/forest_bath.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/forest_bath_v3.webp",
+    "prompt": "ambient nature sounds, tranquil forest atmosphere, soft meditative pads, chirping birds, peaceful and calming"
+  },
+  {
+    "id": "4xsPHm5U3apV59Z",
+    "name": "K-pop",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/k_pop_v3.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/k_pop_v2.webp",
+    "prompt": "K-pop production, high-gloss pop, polished electronic textures, catchy hook-oriented, multi-layered vocals"
+  },
+  {
+    "id": "74LvchoZaKQ22jq",
+    "name": "Birthday roast",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/birthday_roast.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/country_birthday_roast_v2.webp",
+    "prompt": "humorous country style, honky tonk piano, acoustic guitar, sarcastic upbeat mood, storytelling birthday song"
+  },
+  {
+    "id": "32oyidk5mmTG8Ro",
+    "name": "Folk a cappella",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/folk_a_cappella.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/traditional_harmonies_v2.webp",
+    "prompt": "traditional folk a cappella, rich vocal harmonies, pure human voices, storytelling folk style, organic and raw"
+  },
+  {
+    "id": "BNvHQbhDZNpRuYx",
+    "name": "Bad music",
+    "audioUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/audio_assets/30s/bad_music.mp3",
+    "imageUrl": "https://www.gstatic.com/bard-robin-zs/musicgen/image_assets/webp/bad_music_v2.webp",
+    "prompt": "deliberately chaotic and off-key, amateur production, weird sound effects, out of tune instruments, humorous noise"
+  }
+]

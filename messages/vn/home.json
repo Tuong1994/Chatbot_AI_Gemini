@@ -1,5 +1,8 @@
 {
   "home": {
-    "title": "Day la trang Home"
+    "categories": {
+      "image": "Chọn một phong cách cho hình ảnh của bạn",
+      "music": "Chọn một bản nhạc để phối lại"
+    }
   }
 }

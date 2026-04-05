@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FC } from "react";
+import { FC } from "react";
 import { ChevronsUpDown, Globe, Settings, SunMoon } from "lucide-react";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
 import {
@@ -31,12 +31,10 @@ const SidebarSetting: FC = () => {
 
   const { theme, setTheme } = useTheme();
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newLocale = e.target.value;
-
+  const handleChange = (locale: string) => {
     // Tách path hiện tại, thay locale bằng newLocale
     const segments = pathname.split("/");
-    segments[1] = newLocale; // vì segment 0 là "" (do string bắt đầu bằng "/")
+    segments[1] = locale; // vì segment 0 là "" (do string bắt đầu bằng "/")
 
     const newPath = segments.join("/");
     router.push(newPath);
@@ -92,12 +90,12 @@ const SidebarSetting: FC = () => {
                 <DropdownMenuPortal>
                   <DropdownMenuSubContent>
                     <DropdownMenuGroup>
-                      <DropdownMenuRadioGroup value={pathname.split("/")[1]} onValueChange={() => {}}>
-                        {routing.locales.map(locale => (
-                          <DropdownMenuRadioItem key={locale} value={locale}>{t(`locale.${locale}`)}</DropdownMenuRadioItem>
+                      <DropdownMenuRadioGroup value={pathname.split("/")[1]} onValueChange={handleChange}>
+                        {routing.locales.map((locale) => (
+                          <DropdownMenuRadioItem key={locale} value={locale}>
+                            {t(`locale.${locale}`)}
+                          </DropdownMenuRadioItem>
                         ))}
-                        {/* <DropdownMenuRadioItem value="en">{t("locale.en")}</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="vn">{t("locale.vn")}</DropdownMenuRadioItem> */}
                       </DropdownMenuRadioGroup>
                     </DropdownMenuGroup>
                   </DropdownMenuSubContent>
