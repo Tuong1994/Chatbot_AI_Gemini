@@ -4,9 +4,12 @@ export async function POST(req: Request) {
   try {
     const { prompt } = await req.json();
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-    
-    // Lưu ý: Hiện tại bản ổn định nhất là gemini-1.5-flash
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+      systemInstruction:
+        "You are a helpful assistant. Always use rich markdown formatting (tables, headings, bold, lists) where appropriate.",
+    });
 
     // 1. Sử dụng generateContentStream thay vì generateContent
     const result = await model.generateContentStream(prompt);

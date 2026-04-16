@@ -18,40 +18,40 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { routers } from "@/common/constant/routers";
 
 const SidebarChats: FC = () => {
-  const t = useTranslations('appLayout.sidebar')
+  const t = useTranslations("appLayout.sidebar");
 
   const { isMobile } = useSidebar();
 
   const chats = [
     {
+      id: "1",
       name: "Design Engineering",
-      url: "#",
     },
     {
+      id: "2",
       name: "Sales & Marketing",
-      url: "#",
     },
     {
+      id: "3",
       name: "Travel",
-      url: "#",
     },
   ];
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel className="text-sm">
-        {t('chats')}
-      </SidebarGroupLabel>
+      <SidebarGroupLabel className="text-sm">{t("chats")}</SidebarGroupLabel>
       <SidebarMenu>
         {chats.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton size="lg" asChild>
-              <a href={item.url}>
+              <Link href={routers.DETAIL + item.id}>
                 <Dot className="size-8" />
                 <span>{item.name}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -67,11 +67,11 @@ const SidebarChats: FC = () => {
               >
                 <DropdownMenuItem>
                   <Pen className="text-muted-foreground" />
-                  <span>{t('actions.rename')}</span>
+                  <span>{t("actions.rename")}</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Trash2 className="text-muted-foreground" />
-                  <span>{t('actions.delete')}</span>
+                  <span>{t("actions.delete")}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

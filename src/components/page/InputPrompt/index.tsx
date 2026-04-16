@@ -1,6 +1,14 @@
 "use client";
 
-import { forwardRef, ForwardRefRenderFunction, HTMLAttributes, useCallback } from "react";
+import {
+  FormEvent,
+  forwardRef,
+  ForwardRefRenderFunction,
+  TextareaHTMLAttributes,
+  KeyboardEvent,
+  useCallback,
+  useState,
+} from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -22,10 +30,12 @@ import { EToolType } from "@/services/prompt/enum";
 import { useTranslations } from "next-intl";
 import usePromptStore from "@/store/PromptStore";
 
-interface InputPromptProps extends HTMLAttributes<HTMLTextAreaElement> {}
+interface InputPromptProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  onChat?: () => void;
+}
 
 const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProps> = (
-  { ...restProps },
+  { onChat, ...restProps },
   ref
 ) => {
   const t = useTranslations("common");
@@ -35,6 +45,8 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
     state.setSelectedTool,
     state.resetTool,
   ]);
+
+  const [prompt, setPrompt] = useState("");
 
   const tools = [
     {
@@ -75,35 +87,47 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
     setSelectedTool(newTool);
   };
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      onChat?.()
+    }
+  };
+
   return (
     <div className="w-full bg-background">
       {!Boolean(selectedTool) ? <Title className="mb-5 font-medium">{t("inputPrompt.label")} ?</Title> : null}
-      <InputGroup>
-        <InputGroupTextarea ref={ref} {...restProps} placeholder="Ask AI" />
-        <InputGroupAddon align="block-end">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost">
-                <List />
-                <span>{t("inputPrompt.tools.title")}</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-48">
-              <DropdownMenuGroup>
-                <DropdownMenuRadioGroup value={String(selectedTool)} onValueChange={handleSelectTool}>
-                  {renderToolDropdownItem()}
-                </DropdownMenuRadioGroup>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
 
-          {renderSelectedTool()}
+      <form onSubmit={onChat}>
+        <InputGroup>
+          <InputGroupTextarea ref={ref} {...restProps} placeholder="Ask AI" onKeyDown={handleKeyDown} />
 
-          <InputGroupButton variant="ghost" size="sm" className="ml-auto">
-            <SendHorizonal />
-          </InputGroupButton>
-        </InputGroupAddon>
-      </InputGroup>
+          <InputGroupAddon align="block-end">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost">
+                  <List />
+                  <span>{t("inputPrompt.tools.title")}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-48">
+                <DropdownMenuGroup>
+                  <DropdownMenuRadioGroup value={String(selectedTool)} onValueChange={handleSelectTool}>
+                    {renderToolDropdownItem()}
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {renderSelectedTool()}
+
+            <InputGroupButton type="submit" variant="ghost" size="sm" className="ml-auto">
+              <SendHorizonal />
+            </InputGroupButton>
+          </InputGroupAddon>
+        </InputGroup>
+      </form>
+
       <p className="p-2.5 text-xs text-center">{t("inputPrompt.note")}</p>
     </div>
   );

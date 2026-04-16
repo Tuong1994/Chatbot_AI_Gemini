@@ -3,7 +3,7 @@ import { ApiResponse, ResponseError } from "./type";
 
 // const BASE_URL = process.env.NODE_ENV === "development" ? "http://localhost:5000/" : "";
 
-export const BASE_URL = "http://localhost:5000/";
+export const BASE_URL = "http://localhost:3000/";
 
 export const HttpStatus = {
   BAD_REQUEST: 400,
@@ -23,7 +23,11 @@ export const Method = {
 
 export const LIST_LIMIT_ITEMS = 20;
 
-export const defaultResponse = <T>(): ApiResponse<T> => ({ data: {} as T, success: false });
+export const defaultResponse = <T>(): ApiResponse<T> => ({
+  data: {} as T,
+  raw: {} as Response,
+  success: false,
+});
 
 export const apiResponseError = (status: number, error: any) => {
   let responseError: ResponseError = { status: 0, message: "" };

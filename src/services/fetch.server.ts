@@ -60,7 +60,7 @@ const call = async <TBody, TData = any>(config: ApiConfig<TBody>): Promise<ApiRe
     return { ...apiResponse, success: false, error: apiResponseError(res.status, errJson) };
   }
   const data = isJson ? await res.json() : await res.text();
-  return { ...apiResponse, success: true, data };
+  return { ...apiResponse, raw: res, success: true, data };
 };
 
 const Get = <TData>(apiPath: string, abortKey?: string, options?: RequestInit) => {

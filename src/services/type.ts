@@ -64,4 +64,5 @@ export type ResponseResult = {
 
 export interface ApiResponse<T> extends ResponseResult {
   data: T;
+  raw: Response;
 }
