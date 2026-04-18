@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { Title } from "@/components/ui/typography";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
@@ -5,15 +7,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreVertical, Pen, Trash2 } from "lucide-react";
+import { LogOut, MoreVertical, Pen, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
 const ContentHeader: FC = () => {
-  const t = useTranslations("appLayout.sidebar");
+  const t = useTranslations();
 
   const { isMobile } = useSidebar();
 
@@ -41,19 +45,40 @@ const ContentHeader: FC = () => {
           >
             <DropdownMenuItem>
               <Pen className="text-muted-foreground" />
-              <span>{t("actions.rename")}</span>
+              <span>{t("appLayout.sidebar.actions.rename")}</span>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Trash2 className="text-muted-foreground" />
-              <span>{t("actions.delete")}</span>
+              <span>{t("appLayout.sidebar.actions.delete")}</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" className="grayscale" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" className="grayscale" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-48 rounded-lg">
+            <DropdownMenuGroup>
+              <div className="p-2.5 flex flex-col justify-between items-center">
+                <Avatar className="size-20">
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" className="grayscale" />
+                </Avatar>
+                <span>Account name</span>
+              </div>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <LogOut className="text-muted-foreground" />
+                <span>{t("common.profile.logout")}</span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );

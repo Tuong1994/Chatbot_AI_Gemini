@@ -17,6 +17,7 @@ const ChatForm: FC = () => {
 
   return (
     <>
+      {isLoading && <Spinner className="size-6" />}
       <div className="prose dark:prose-invert max-w-none custom-markdown">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -32,7 +33,6 @@ const ChatForm: FC = () => {
         >
           {aiResponse}
         </ReactMarkdown>
-        {isLoading && <Spinner className="size-4" />}
       </div>
       <InputPrompt value={prompt} onChange={(e) => setPrompt(e.target.value)} onChat={handleSubmit} />
     </>

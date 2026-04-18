@@ -93,6 +93,9 @@
         "music": "Create music"
       }
     },
+    "profile": {
+      "logout": "Logout"
+    },
     "message": {
       "success": {
         "signIn": "Sign in success",

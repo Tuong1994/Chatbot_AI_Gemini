@@ -93,6 +93,9 @@
         "music": "Tạo nhạc"
       }
     },
+    "profile": {
+      "logout": "Đăng xuất"
+    },
     "message": {
       "success": {
         "signIn": "Đăng nhập thành công",

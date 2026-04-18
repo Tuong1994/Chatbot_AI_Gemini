@@ -1,20 +1,15 @@
-"use client";
-
+import { NextPage } from "next";
 import InputPrompt from "@/components/page/InputPrompt";
 import ToolCategories from "@/features/Home/ToolCategories";
 import PageLayout from "@/components/page/PageLayout";
-import usePromptStore from "@/store/PromptStore";
+import withLocale from "@/lib/withLocale";
 
-export default function Home() {
-  const [selectedTool] = usePromptStore((state) => [state.selectedTool]);
-
+const Home: NextPage = () => {
   return (
     <PageLayout footer={<InputPrompt />}>
-      {Boolean(selectedTool) && (
-        <div className="flex-1">
-          <ToolCategories />
-        </div>
-      )}
+      <ToolCategories />
     </PageLayout>
   );
-}
+};
+
+export default withLocale(Home);

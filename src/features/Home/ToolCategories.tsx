@@ -72,23 +72,29 @@ const ToolCategories: FC<ToolCategoriesProps> = () => {
     loadData();
   }, [selectedTool]);
 
+  if (!selectedTool) return <></>;
+
   return (
-    <ScrollArea className="pt-5 pb-40">
-      <Title className="mb-5 font-light">{renderTitle()}</Title>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {items.map((item) => (
-          <AspectRatio ratio={1 / 1} key={item.id}>
-            <Image
-              fill
-              src={item.imageUrl}
-              alt={item.name}
-              className="rounded-md"
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            />
-          </AspectRatio>
-        ))}
-      </div>
-    </ScrollArea>
+    <div className="flex-1">
+      <ScrollArea className="pt-5 pb-40">
+        <Title className="mb-5 font-light">{renderTitle()}</Title>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {items.map((item) => (
+            <AspectRatio ratio={1 / 1} key={item.id} className="rounded-lg overflow-hidden">
+              <Image
+                fill
+                src={item.imageUrl}
+                alt={item.name}
+                className="rounded-md cursor-pointer hover:scale-110 transition-[transform_0.4s]"
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              />
+              <div className="w-full min-h-2 bg-background shadow-[0_-50px_30px_40px_oklch(0.145_0_0)] absolute -bottom-1/2 z-2"></div>
+              <span className="w-max absolute left-1.5 bottom-1/6 text-xs">{item.name}</span>
+            </AspectRatio>
+          ))}
+        </div>
+      </ScrollArea>
+    </div>
   );
 };
 
