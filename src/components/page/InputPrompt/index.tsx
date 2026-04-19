@@ -7,7 +7,7 @@ import {
   TextareaHTMLAttributes,
   KeyboardEvent,
   useCallback,
-  useState,
+  ChangeEvent,
 } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,24 +29,27 @@ import { Title } from "@/components/ui/typography";
 import { EToolType } from "@/services/prompt/enum";
 import { useTranslations } from "next-intl";
 import usePromptStore from "@/store/PromptStore";
+import usePromptChat from "./usePromptChat";
 
 interface InputPromptProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  onChat?: () => void;
+  onSendMessage?: () => void;
 }
 
 const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProps> = (
-  { onChat, ...restProps },
+  { onSendMessage, ...restProps },
   ref
 ) => {
   const t = useTranslations("common");
 
-  const [selectedTool, setSelectedTool, resetTool] = usePromptStore((state) => [
+  const [prompt, selectedTool, setPrompt, setSelectedTool, resetTool] = usePromptStore((state) => [
+    state.prompt,
     state.selectedTool,
+    state.setPrompt,
     state.setSelectedTool,
     state.resetTool,
   ]);
 
-  const [prompt, setPrompt] = useState("");
+  const { onChat } = usePromptChat();
 
   const tools = [
     {
@@ -90,17 +93,36 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      onChat?.()
+      onChat(prompt);
+      onSendMessage?.();
     }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    setPrompt(value);
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    onChat(prompt);
+    onSendMessage?.();
   };
 
   return (
     <div className="w-full bg-background">
       {!Boolean(selectedTool) ? <Title className="mb-5 font-medium">{t("inputPrompt.label")} ?</Title> : null}
 
-      <form onSubmit={onChat}>
+      <form onSubmit={handleSubmit}>
         <InputGroup>
-          <InputGroupTextarea ref={ref} {...restProps} placeholder="Ask AI" onKeyDown={handleKeyDown} />
+          <InputGroupTextarea
+            ref={ref}
+            {...restProps}
+            value={prompt}
+            onChange={handleChange}
+            placeholder="Ask AI"
+            onKeyDown={handleKeyDown}
+          />
 
           <InputGroupAddon align="block-end">
             <DropdownMenu>

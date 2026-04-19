@@ -1,19 +1,19 @@
 "use client";
 
 import { onStreamChat } from "@/services/prompt/api";
-import { useState } from "react";
+import usePromptStore from "@/store/PromptStore";
 
 const usePromptChat = () => {
-  const [data, setData] = useState<string>("");
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const [isError, setIsError] = useState<boolean>(false);
+  const [setAiResponse, setIsLoading, setIsError] = usePromptStore((state) => [
+    state.setAiResponse,
+    state.setIsLoading,
+    state.setIsError,
+  ]);
 
   const onChat = async (prompt: string) => {
     setIsLoading(true);
     setIsError(false);
-    setData(""); // Xóa nội dung cũ
+    setAiResponse(""); // Xóa nội dung cũ
     try {
       const response = await onStreamChat({ prompt });
       if (!prompt) return;
@@ -29,7 +29,8 @@ const usePromptChat = () => {
         // Giải mã binary sang text
         const chunkValue = decoder.decode(value, { stream: true });
         // 3. Update state liên tục để tạo hiệu ứng chữ chạy
-        setData((prev) => prev + chunkValue);
+        // setData((prev) => prev + chunkValue);
+        setAiResponse(chunkValue);
       }
     } catch (error) {
       console.log(error);
@@ -39,7 +40,7 @@ const usePromptChat = () => {
     }
   };
 
-  return { data, isLoading, isError, onChat };
+  return { onChat };
 };
 
 export default usePromptChat;

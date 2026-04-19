@@ -1,19 +1,14 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Spinner } from "@/components/ui/spinner";
-import InputPrompt from "@/components/page/InputPrompt";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import usePromptChat from "@/components/page/InputPrompt/usePromptChat";
+import usePromptStore from "@/store/PromptStore";
 
 const ChatForm: FC = () => {
-  const [prompt, setPrompt] = useState("");
-
-  const { data: aiResponse, isLoading, onChat } = usePromptChat();
-
-  const handleSubmit = () => onChat(prompt);
+  const [aiResponse, isLoading] = usePromptStore((state) => [state.aiResponse, state.isLoading]);
 
   return (
     <>
@@ -34,7 +29,6 @@ const ChatForm: FC = () => {
           {aiResponse}
         </ReactMarkdown>
       </div>
-      <InputPrompt value={prompt} onChange={(e) => setPrompt(e.target.value)} onChat={handleSubmit} />
     </>
   );
 };
