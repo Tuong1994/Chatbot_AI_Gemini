@@ -1,4 +1,4 @@
-import { EToolType } from "@/services/prompt/enum";
+import { EToolType } from "@/services/conversation/enum";
 import { create, StateCreator } from "zustand";
 
 interface PromptState {

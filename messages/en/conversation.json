@@ -1,0 +1,8 @@
+{
+  "conversation": {
+    "actions": {
+      "copyPrompt": "Copy prompt",
+      "editPrompt": "Edit prompt"
+    }
+  }
+}

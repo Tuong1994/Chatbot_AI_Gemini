@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/input-group";
 import { Image, List, Music, SendHorizonal, X } from "lucide-react";
 import { Title } from "@/components/ui/typography";
-import { EToolType } from "@/services/prompt/enum";
+import { EToolType } from "@/services/conversation/enum";
 import { useTranslations } from "next-intl";
 import usePromptStore from "@/store/PromptStore";
 import usePromptChat from "./usePromptChat";
@@ -41,13 +41,17 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
 ) => {
   const t = useTranslations("common");
 
-  const [prompt, selectedTool, setPrompt, setSelectedTool, resetTool] = usePromptStore((state) => [
-    state.prompt,
-    state.selectedTool,
-    state.setPrompt,
-    state.setSelectedTool,
-    state.resetTool,
-  ]);
+  const [prompt, selectedTool, aiResponse, isLoading, setPrompt, setSelectedTool, resetTool] = usePromptStore(
+    (state) => [
+      state.prompt,
+      state.selectedTool,
+      state.aiResponse,
+      state.isLoading,
+      state.setPrompt,
+      state.setSelectedTool,
+      state.resetTool,
+    ]
+  );
 
   const { onChat } = usePromptChat();
 
@@ -63,6 +67,8 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
       icon: Music,
     },
   ];
+
+  const isRender = !Boolean(selectedTool || aiResponse || isLoading);
 
   const renderToolDropdownItem = () => {
     return tools.map((tool) => (
@@ -84,6 +90,12 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
         </Button>
       ));
   }, [selectedTool]);
+
+  const renderPlaceholder = () => {
+    if (selectedTool === EToolType.IMAGE) return t("form.placeholder.image");
+    if (selectedTool === EToolType.MUSIC) return t("form.placeholder.music");
+    return t("form.placeholder.chatbot");
+  };
 
   const handleSelectTool = (tool: string) => {
     const newTool = tool as EToolType;
@@ -111,7 +123,7 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
 
   return (
     <div className="w-full bg-background">
-      {!Boolean(selectedTool) ? <Title className="mb-5 font-medium">{t("inputPrompt.label")} ?</Title> : null}
+      {isRender && <Title className="mb-5 font-medium">{t("inputPrompt.label")} ?</Title>}
 
       <form onSubmit={handleSubmit}>
         <InputGroup>
@@ -120,7 +132,7 @@ const InputPrompt: ForwardRefRenderFunction<HTMLTextAreaElement, InputPromptProp
             {...restProps}
             value={prompt}
             onChange={handleChange}
-            placeholder="Ask AI"
+            placeholder={renderPlaceholder()}
             onKeyDown={handleKeyDown}
           />
 

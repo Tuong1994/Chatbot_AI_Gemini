@@ -1,0 +1,8 @@
+{
+  "conversation": {
+    "actions": {
+      "copyPrompt": "Sao chép câu lệnh",
+      "editPrompt": "Chỉnh sửa câu lệnh"
+    }
+  }
+}

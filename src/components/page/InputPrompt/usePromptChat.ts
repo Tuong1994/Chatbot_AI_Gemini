@@ -1,6 +1,6 @@
 "use client";
 
-import { onStreamChat } from "@/services/prompt/api";
+import { onStreamChat } from "@/services/conversation/api";
 import usePromptStore from "@/store/PromptStore";
 
 const usePromptChat = () => {

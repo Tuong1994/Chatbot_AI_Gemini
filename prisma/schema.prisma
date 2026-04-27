@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  password          String
+  phone             String
+  role              String
+  firstName         String?
+  lastName          String?
+  fullName          String?
+  gender            String?
+  birthday          String?
+  isDelete          Boolean?
+  googleId          String?  @unique()
+  resetToken        String?
+  resetTokenExpires BigInt?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  image         Image?
+  auth          Auth?
+  conversations Conversation[]
+
+  @@index([isDelete, email])
+  @@map("user")
+}
+
+model Auth {
+  id        String   @id @default(uuid())
+  token     String   @db.VarChar(3000)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("auth")
+}
+
+model Conversation {
+  id        String   @id @default(ulid())
+  title     String
+  isDelete  Boolean?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId   String    @unique
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@map("conversation")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  content   String   @db.VarChar(3000)
+  role      String
+  isDelete  Boolean?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("message")
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  path      String
+  size      Int
+  publicId  String
+  isDelete  Boolean?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([isDelete])
+  @@map("image")
+}

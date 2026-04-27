@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Title } from "@/components/ui/typography";
-import { EToolType } from "@/services/prompt/enum";
+import { EToolType } from "@/services/conversation/enum";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import usePromptStore from "@/store/PromptStore";
