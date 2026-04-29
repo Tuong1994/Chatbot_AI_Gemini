@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { ERole } from "@/services/user/enum";
 import type { Messages } from "@/services/message/type";
@@ -22,33 +22,55 @@ const Messages: FC = () => {
     {
       id: "2",
       content:
-        "### The Whispering Pebble Elara loved the beach at sunset, when the sand glowed like embers and the waves whispered secrets to the shore. Most days, she collected shells, but today felt different. A glint of impossible colour caught her eye near a tide pool, just as the last sliver of sun dipped below the horizon. It wasn't a shell, nor a piece of sea glass. It was a pebble, smooth and perfectly round, but shimmering with the blues of the deep ocean and the purples of the twilight sky. As she picked it up, a faint, almost imperceptible hum vibrated against her palm. It felt alive, radiating a gentle warmth. She pressed it to her ear. ***Whush... whush...*** It was the sound of the ocean, miniaturized, echoing from within the stone. A tiny, perfect secret. Elara clutched the pebble tightly, a wide smile spreading across her face. This wasn't just a stone; it was a piece of the sea's ancient song, humming just for her. She knew, with a certainty only a child could possess, that she’d found her very own ocean companion, a tiny heart beating with the rhythm of the waves. She tucked it carefully into her pocket, the hum still a faint tremor against her hip, and walked home beneath the burgeoning stars, a guardian of the ocean's smallest, most magical secret.",
+        "# The Whispering Glimmer\n\nElara, an astronomer whose life was etched in starlight, adjusted the colossal telescope. Perched on the highest peak of Mount Cinder, her observatory hummed with quiet purpose. Tonight, a familiar, ancient star cluster, **The Dragon's Breath**, was her quarry.\n\nUsually, its familiar shimmer brought comfort. But tonight, a tiny anomaly flickered at its periphery. Not a comet, nor a rogue asteroid. This was… a pulse. A rhythmic, almost deliberate blinking.\n\nShe leaned closer, her eye pressed to the eyepiece until the dark ring of the cosmos filled her vision. Zooming in, the pulse resolved into a cluster of lights, too ordered to be natural. A grid, perhaps? A structure? It was moving, not drifting, but *navigating*.\n\nA chill, not of the mountain air but of profound realization, traced her spine. This wasn't merely a discovery; it was a conversation. For centuries, humanity had gazed outward, wondering if anyone gazed back.\n\nWith trembling fingers, Elara reached for the communication array, her heart thudding against her ribs. The universe had just sent a message, and she was the first to read it. The night sky, once a canvas of distant beauty, had become a bustling thoroughfare.",
       role: ERole.BOT,
     },
   ];
 
   return (
     <>
+      {/* {isLoading && <Spinner className="size-6" />}
+      <div className="prose dark:prose-invert max-w-none custom-markdown">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={{
+            // Tùy chỉnh để Table có thanh cuộn ngang khi quá dài
+            table: ({ node, ...props }) => (
+              <div className="table-wrapper">
+                <table {...props} />
+              </div>
+            ),
+          }}
+        >
+          {aiResponse}
+        </ReactMarkdown>
+      </div> */}
+
       {messages.map((message) => (
         <>
-          <UserMessage />
-          {isLoading && <Spinner className="size-6" />}
-          <div className="prose dark:prose-invert max-w-none custom-markdown">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-              components={{
-                // Tùy chỉnh để Table có thanh cuộn ngang khi quá dài
-                table: ({ node, ...props }) => (
-                  <div className="table-wrapper">
-                    <table {...props} />
-                  </div>
-                ),
-              }}
-            >
-              {aiResponse}
-            </ReactMarkdown>
-          </div>
+          {message.role === ERole.USER && <UserMessage content={message.content} />}
+          {message.role === ERole.BOT && (
+            <>
+              {isLoading && <Spinner className="size-6" />}
+              <div className="prose dark:prose-invert max-w-none custom-markdown">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw]}
+                  components={{
+                    // Tùy chỉnh để Table có thanh cuộn ngang khi quá dài
+                    table: ({ node, ...props }) => (
+                      <div className="table-wrapper">
+                        <table {...props} />
+                      </div>
+                    ),
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              </div>
+            </>
+          )}
         </>
       ))}
     </>

@@ -15,28 +15,32 @@ const UserMessage: FC<UserMessageProps> = ({ content }) => {
   const t = useTranslations("conversation");
 
   return (
-    <div className="flex gap-1 justify-end items-center">
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="ghost">
-            <Copy />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">{t("actions.copyPrompt")}</TooltipContent>
-      </Tooltip>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="ghost">
-            <Pen />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom">{t("actions.editPrompt")}</TooltipContent>
-      </Tooltip>
+    <div className="flex justify-end mb-8">
+      <div className="group max-w-max flex gap-1 items-center">
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="ghost">
+              <Copy />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">{t("actions.copyPrompt")}</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="ghost">
+              <Pen />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">{t("actions.editPrompt")}</TooltipContent>
+        </Tooltip>
+      </div>
       <Card className="max-w-max">
         <CardContent>
           <CardDescription>{content}</CardDescription>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 };
